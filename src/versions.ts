@@ -4,7 +4,12 @@ import satisfies from "semver/functions/satisfies";
 import isPast from "date-fns/isPast";
 import parseISO from "date-fns/parseISO";
 
-const versionDates = {
+type VersionDate = { version: string; eol: string };
+type VersionDates = { [key: string]: VersionDate[] };
+
+export type VersionResult = VersionDate & { lang: string; isEol: boolean };
+
+const versionDates: VersionDates = {
   // https://nodejs.org/en/about/releases/
   // https://endoflife.date/nodejs
   nodejs: [
@@ -28,17 +33,21 @@ const versionDates = {
   ],
 };
 
-export function getVersion(lang, version) {
+export function getVersion(
+  lang?: string,
+  version?: string
+): VersionResult | null {
   if (!lang || !versionDates[lang]) {
     throw new InvalidArgumentException(`Invalid lang`);
   }
 
-  if (!valid(coerce(version))) {
+  const coercedVersion = coerce(version);
+  if (!version || !coercedVersion || !valid(coercedVersion)) {
     throw new InvalidArgumentException(`Invalid version`);
   }
 
   const result = versionDates[lang].find((v) =>
-    satisfies(coerce(version), v.version)
+    satisfies(coercedVersion, v.version)
   );
 
   if (!result) {
@@ -53,11 +62,8 @@ export function getVersion(lang, version) {
   };
 }
 
-function InvalidArgumentException(message) {
-  this.message = message;
-  this.name = "InvalidArgumentException";
+export class InvalidArgumentException {
+  constructor(public message: string) {}
+  name = "InvalidArgumentException";
+  toString = () => `${this.name}: "${this.message}"`;
 }
-
-InvalidArgumentException.prototype.toString = function () {
-  return `${this.name}: "${this.message}"`;
-};

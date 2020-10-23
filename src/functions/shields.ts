@@ -1,7 +1,8 @@
 import querystring from "querystring";
-import { getVersion } from "../versions";
+import { APIGatewayEvent, ProxyResult } from "aws-lambda";
+import { getVersion, InvalidArgumentException } from "../versions";
 
-exports.handler = async (event) => {
+export async function handler(event: APIGatewayEvent): Promise<ProxyResult> {
   try {
     const [versionRaw, lang] = event.path.split("/").reverse();
     const version = querystring.unescape(versionRaw);
@@ -12,20 +13,22 @@ exports.handler = async (event) => {
       return { statusCode: 404, body: `Version not found` };
     }
 
-    // Docs: https://badgen.net/https
+    // Docs: https://shields.io/endpoint
     return {
       statusCode: 200,
       body: JSON.stringify({
-        subject: `${lang} ${version}`,
-        status: result.eol,
-        color: result.isEol ? "red" : "green",
+        schemaVersion: 1,
+        label: `${lang} ${version}`,
+        message: result.eol,
+        color: result.isEol ? "critical" : "success",
+        cacheSeconds: 60 * 60 * 24,
       }),
     };
   } catch (err) {
-    if (err.name === "InvalidArgumentException") {
+    if (err instanceof InvalidArgumentException) {
       return { statusCode: 400, body: err.message };
     }
 
     return { statusCode: 500, body: err.toString() };
   }
-};
+}

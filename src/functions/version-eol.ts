@@ -1,13 +1,14 @@
-import { getVersion } from "../versions";
+import { APIGatewayEvent, ProxyResult } from "aws-lambda";
+import { getVersion, InvalidArgumentException } from "../versions";
 
-exports.handler = async (event) => {
+export async function handler(event: APIGatewayEvent): Promise<ProxyResult> {
   try {
     let lang, version;
 
     if (event.httpMethod === "POST") {
-      ({ lang, version } = JSON.parse(event.body));
+      ({ lang, version } = JSON.parse(event.body || "{}"));
     } else {
-      ({ lang, version } = event.queryStringParameters);
+      ({ lang, version } = event.queryStringParameters || {});
     }
 
     const result = getVersion(lang, version);
@@ -21,10 +22,10 @@ exports.handler = async (event) => {
       body: JSON.stringify(result),
     };
   } catch (err) {
-    if (err.name === "InvalidArgumentException") {
+    if (err instanceof InvalidArgumentException) {
       return { statusCode: 400, body: err.message };
     }
 
     return { statusCode: 500, body: err.toString() };
   }
-};
+}

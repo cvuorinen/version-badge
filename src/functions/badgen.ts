@@ -16,6 +16,7 @@ export async function handler(event: APIGatewayEvent): Promise<ProxyResult> {
     // Docs: https://badgen.net/https
     return {
       statusCode: 200,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         subject: `${lang} ${version}`,
         status: result.eol,

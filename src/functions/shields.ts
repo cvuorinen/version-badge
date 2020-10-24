@@ -16,6 +16,7 @@ export async function handler(event: APIGatewayEvent): Promise<ProxyResult> {
     // Docs: https://shields.io/endpoint
     return {
       statusCode: 200,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         schemaVersion: 1,
         label: `${lang} ${version}`,

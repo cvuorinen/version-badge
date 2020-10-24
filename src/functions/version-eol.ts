@@ -19,6 +19,7 @@ export async function handler(event: APIGatewayEvent): Promise<ProxyResult> {
 
     return {
       statusCode: 200,
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(result),
     };
   } catch (err) {

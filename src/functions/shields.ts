@@ -1,6 +1,6 @@
 import querystring from "querystring";
 import { APIGatewayEvent, ProxyResult } from "aws-lambda";
-import { getVersion, InvalidArgumentException } from "../versions";
+import { getVersion, InvalidArgumentException } from "../get-version";
 
 export async function handler(event: APIGatewayEvent): Promise<ProxyResult> {
   try {
@@ -19,7 +19,7 @@ export async function handler(event: APIGatewayEvent): Promise<ProxyResult> {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         schemaVersion: 1,
-        label: `${lang} ${version}`,
+        label: `${result.lang} ${result.version}`,
         message: result.eol,
         color: result.isEol ? "critical" : "success",
         cacheSeconds: 60 * 60 * 24,

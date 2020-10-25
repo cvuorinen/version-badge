@@ -1,15 +1,8 @@
-import coerce from "semver/functions/coerce";
-import valid from "semver/functions/valid";
-import satisfies from "semver/functions/satisfies";
-import isPast from "date-fns/isPast";
-import parseISO from "date-fns/parseISO";
+export type DateString = string; // YYYY-MM-DD
+export type Version = { version: string; eol: DateString };
+export type Versions = { [key: string]: Version[] };
 
-type VersionDate = { version: string; eol: string };
-type VersionDates = { [key: string]: VersionDate[] };
-
-export type VersionResult = VersionDate & { lang: string; isEol: boolean };
-
-const versionDates: VersionDates = {
+export const versions: Versions = {
   // https://nodejs.org/en/about/releases/
   // https://endoflife.date/nodejs
   nodejs: [
@@ -32,38 +25,3 @@ const versionDates: VersionDates = {
     { version: "5.6.x", eol: "2018-12-31" },
   ],
 };
-
-export function getVersion(
-  lang?: string,
-  version?: string
-): VersionResult | null {
-  if (!lang || !versionDates[lang]) {
-    throw new InvalidArgumentException(`Invalid lang`);
-  }
-
-  const coercedVersion = coerce(version);
-  if (!version || !coercedVersion || !valid(coercedVersion)) {
-    throw new InvalidArgumentException(`Invalid version`);
-  }
-
-  const result = versionDates[lang].find((v) =>
-    satisfies(coercedVersion, v.version)
-  );
-
-  if (!result) {
-    return null;
-  }
-
-  return {
-    ...result,
-    lang,
-    version,
-    isEol: isPast(parseISO(result.eol)),
-  };
-}
-
-export class InvalidArgumentException {
-  constructor(public message: string) {}
-  name = "InvalidArgumentException";
-  toString = () => `${this.name}: "${this.message}"`;
-}

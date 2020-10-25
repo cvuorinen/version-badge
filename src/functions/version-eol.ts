@@ -1,5 +1,5 @@
 import { APIGatewayEvent, ProxyResult } from "aws-lambda";
-import { getVersion, InvalidArgumentException } from "../versions";
+import { getVersion, InvalidArgumentException } from "../get-version";
 
 export async function handler(event: APIGatewayEvent): Promise<ProxyResult> {
   try {

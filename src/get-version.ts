@@ -3,7 +3,7 @@ import valid from "semver/functions/valid";
 import satisfies from "semver/functions/satisfies";
 import isPast from "date-fns/isPast";
 import parseISO from "date-fns/parseISO";
-import { Version, versions } from "./versions";
+import { CURRENT, Version, versions } from "./versions";
 
 export type VersionResult = Version & { lang: string; isEol: boolean };
 
@@ -31,7 +31,7 @@ export function getVersion(
   return {
     ...result,
     lang,
-    isEol: isPast(parseISO(result.eol)),
+    isEol: result.eol !== CURRENT && isPast(parseISO(result.eol)),
   };
 }
 

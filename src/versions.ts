@@ -1,5 +1,10 @@
 export type DateString = string; // YYYY-MM-DD
-export type Version = { version: string; eol: DateString };
+
+// use instead of date when a version is current stable release and has no eol date yet
+export const CURRENT = "current";
+
+export type Version = { version: string; eol: DateString | typeof CURRENT };
+
 export type Versions = { [key: string]: Version[] };
 
 export const versions: Versions = {
@@ -23,5 +28,54 @@ export const versions: Versions = {
     { version: "7.1.x", eol: "2019-12-01" },
     { version: "7.0.x", eol: "2019-01-01" },
     { version: "5.6.x", eol: "2018-12-31" },
+  ],
+  // https://www.python.org/downloads/
+  // https://endoflife.date/python
+  python: [
+    { version: "3.9.x", eol: "2025-10-05" },
+    { version: "3.8.x", eol: "2024-10-14" },
+    { version: "3.7.x", eol: "2023-06-27" },
+    { version: "3.6.x", eol: "2021-12-23" },
+    { version: "3.5.x", eol: "2020-09-13" },
+    { version: "2.7.x", eol: "2020-01-01" },
+  ],
+
+  // https://angular.io/guide/releases#support-policy-and-schedule
+  angular: [
+    { version: "10.x", eol: "2021-12-24" },
+    { version: "9.x", eol: "2021-08-06" },
+    { version: "8.x", eol: "2020-11-28" },
+    { version: "7.x", eol: "2020-04-18" },
+    { version: "6.x", eol: "2019-11-03" },
+    { version: "5.x", eol: "2019-05-01" },
+    { version: "4.x", eol: "2018-09-23" },
+  ],
+  // https://docs.angularjs.org/misc/version-support-status
+  angularjs: [{ version: "1.8.x", eol: "2021-12-31" }],
+  // https://github.com/vuejs/roadmap#release-channels-and-lts
+  vue: [
+    { version: "3.x", eol: CURRENT },
+    { version: "2.x", eol: "2023-09-18" },
+    { version: "1.x", eol: "2019-09-30" },
+  ],
+  // https://symfony.com/releases
+  // https://endoflife.date/symfony
+  symfony: [
+    { version: "5.2.x", eol: "2021-07-21" },
+    { version: "5.1.x", eol: "2021-01-21" },
+    { version: "5.0.x", eol: "2020-07-21" },
+    { version: "4.4.x", eol: "2023-11-21" },
+    { version: "4.3.x", eol: "2020-07-01" },
+    { version: "4.2.x", eol: "2020-01-01" },
+    { version: "4.1.x", eol: "2019-07-01" },
+    { version: "4.0.x", eol: "2019-01-01" },
+    { version: "3.4.x", eol: "2021-11-01" },
+    { version: "3.3.x", eol: "2018-07-01" },
+    { version: "3.2.x", eol: "2018-01-01" },
+    { version: "3.1.x", eol: "2017-07-01" },
+    { version: "3.0.x", eol: "2017-01-01" },
+    { version: "2.8.x", eol: "2019-11-01" },
+    { version: "2.7.x", eol: "2019-05-01" },
+    { version: "2.3.x", eol: "2017-05-01" },
   ],
 };

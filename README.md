@@ -76,7 +76,7 @@ Response format:
 type VersionResult = {
     lang: string;
     version: string;
-    eol: DateString; // Date string as YYYY-MM-DD
+    eol: DateString | "current"; // Date string as YYYY-MM-DD
     isEol: boolean;
 }
 ```

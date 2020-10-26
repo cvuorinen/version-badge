@@ -51,7 +51,12 @@ export const versions: Versions = {
     { version: "4.x", eol: "2018-09-23" },
   ],
   // https://docs.angularjs.org/misc/version-support-status
-  angularjs: [{ version: "1.8.x", eol: "2021-12-31" }],
+  angularjs: [
+    { version: "1.8.x", eol: "2021-12-31" },
+    { version: "1.7.x", eol: "2020-06-04" },
+    { version: "1.6.x", eol: "2018-07-01" },
+    { version: "1.5.x", eol: "2017-01-13" },
+  ],
   // https://github.com/vuejs/roadmap#release-channels-and-lts
   vue: [
     { version: "3.x", eol: CURRENT },

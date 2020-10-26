@@ -18,6 +18,7 @@ export const versions: Versions = {
     { version: "12.x", eol: "2022-04-30" },
     { version: "10.x", eol: "2021-04-30" },
     { version: "8.x", eol: "2019-12-31" },
+    { version: "6.x", eol: "2019-04-01" },
   ],
   // https://www.php.net/supported-versions.php
   // https://endoflife.date/php

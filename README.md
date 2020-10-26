@@ -3,8 +3,8 @@
 Create badges to display if a given version of a programming language, framework etc. is still supported
 or if it's EOL (end-of-life).
 
-![lang 0.1](https://img.shields.io/badge/lang%200.1-2020--01--01-red)
-![example 2.0](https://img.shields.io/badge/example%202.0-2030--01--01-green?style=flat-square)
+![php 7.1](https://img.shields.io/endpoint?url=https://version-badge.netlify.app/shields/php/7.1)
+![nodejs 16](https://img.shields.io/endpoint?style=flat-square&url=https://version-badge.netlify.app/shields/nodejs/%253E%253D16)
 
 Supported products and version ranges can be seen in [versions.ts](src/versions.ts). If there are some versions
 missing or you don't find a programming language/framework you would like to use it with, PRs are welcome.
@@ -15,6 +15,33 @@ All endpoints require two parameters, `lang` and `version`.
 
 * `lang`: name of the language/framework (as written in [versions.ts](src/versions.ts))
 * `version`: [semver](https://www.npmjs.com/package/semver) compatible version identifier, for example `1.2.3`, `2.5`, `4.6.x`, `>=1.0.0`, `v2` etc.
+
+## Shields IO
+
+Returns [Shields IO](https://shields.io/) compatible data to generate a live badge image.
+
+Endpoint: `https://version-badge.netlify.app/shields/:lang/:version`
+
+Combine with `https://img.shields.io/endpoint` and provide version-badge endpoint as `url` query parameter.<br>
+Add `style` query parameter to use a different badge image style (see https://shields.io/#styles for available styles).
+
+More information about using Shields IO with custom endpoint: https://shields.io/endpoint
+
+Shields IO supports caching badges and Version Badge currently sets the cache to 24h
+(but you can override it with an URL parameter if needed, read more from the link above).
+
+Note, any characters that require URL encoding in the Version Badge URL need to be
+double encoded as the URL is also passed as URL parameter to Shields IO, e.g. `>=` (see examples).
+
+### Examples
+
+`![php 7.1](https://img.shields.io/endpoint?url=https://version-badge.netlify.app/shields/php/7.1)`<br>
+![php 7.1](https://img.shields.io/endpoint?url=https://version-badge.netlify.app/shields/php/7.1)
+
+
+`![nodejs 16](https://img.shields.io/endpoint?style=flat-square&url=https://version-badge.netlify.app/shields/nodejs/%253E%253D16)`<br>
+![nodejs 16](https://img.shields.io/endpoint?style=flat-square&url=https://version-badge.netlify.app/shields/nodejs/%253E%253D16)
+
 
 ## Badgen
 
@@ -34,33 +61,8 @@ Note, remember to URL encode any characters that require it, e.g. `>=`
 `![php 7.1](https://badgen.net/https/version-badge.netlify.app/badgen/php/7.1)`<br>
 ![php 7.1](https://badgen.net/https/version-badge.netlify.app/badgen/php/7.1)
 
-`![nodejs 16](https://flat.badgen.net/https/version-badge.netlify.app/badgen/nodejs/%3E%3D16.0.1)`<br>
-![nodejs 16](https://flat.badgen.net/https/version-badge.netlify.app/badgen/nodejs/%3E%3D16.0.1)
-
-
-## Shields IO
-
-Returns [Shields IO](https://shields.io/) compatible data to generate a live badge image.
-
-Endpoint: `https://version-badge.netlify.app/shields/:lang/:version`
-
-Combine with `https://img.shields.io/endpoint` and provide version-badge endpoint as `url` query parameter.
-Add `style` query parameter to use a different badge image style (see https://shields.io/#styles for available styles).
-
-More information about using Shields IO with custom endpoint: https://shields.io/endpoint
-
-Remember to URL encode the version badge URL as it is used as a query parameter.<br>
-Note, any characters that require URL encoding in the version badge URL need to be
-double encoded, e.g. `>=` (see examples).
-
-### Examples
-
-`![php 7.1](https://img.shields.io/endpoint?url=https%3A%2F%2Fversion-badge.netlify.app%2Fshields%2Fphp%2F7.1)`<br>
-![php 7.1](https://img.shields.io/endpoint?url=https%3A%2F%2Fversion-badge.netlify.app%2Fshields%2Fphp%2F7.1)
-
-
-`![nodejs 16](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fversion-badge.netlify.app%2Fshields%2Fnodejs%2F%253E%253D16)`<br>
-![nodejs 16](https://img.shields.io/endpoint?style=flat-square&url=https%3A%2F%2Fversion-badge.netlify.app%2Fshields%2Fnodejs%2F%253E%253D16)
+`![nodejs 16](https://flat.badgen.net/https/version-badge.netlify.app/badgen/nodejs/%3E%3D16)`<br>
+![nodejs 16](https://flat.badgen.net/https/version-badge.netlify.app/badgen/nodejs/%3E%3D16)
 
 
 ## Version EOL

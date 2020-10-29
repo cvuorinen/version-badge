@@ -84,4 +84,15 @@ export const versions: Versions = {
     { version: "2.7.x", eol: "2019-05-01" },
     { version: "2.3.x", eol: "2017-05-01" },
   ],
+
+  // https://wiki.centos.org/About/Product
+  // https://wiki.centos.org/FAQ/General#What_is_the_support_.27.27end_of_life.27.27_for_each_CentOS_release.3F
+  centos: [
+    { version: "8", eol: "2029-05-31" },
+    { version: "7", eol: "2024-06-30" },
+    { version: "6", eol: "2020-11-30" },
+    { version: "5", eol: "2017-03-31" },
+    { version: "4", eol: "2012-02-29" },
+    { version: "3", eol: "2010-10-31" },
+  ],
 };

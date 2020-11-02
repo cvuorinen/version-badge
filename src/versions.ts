@@ -84,6 +84,12 @@ export const versions: Versions = {
     { version: "2.7.x", eol: "2019-05-01" },
     { version: "2.3.x", eol: "2017-05-01" },
   ],
+  // https://loopback.io/doc/en/contrib/Long-term-support.html
+  loopback: [
+    { version: "4", eol: "2021-04-01" },
+    { version: "3", eol: "2020-12-01" },
+    { version: "2", eol: "2019-04-01" },
+  ],
 
   // https://wiki.centos.org/About/Product
   // https://wiki.centos.org/FAQ/General#What_is_the_support_.27.27end_of_life.27.27_for_each_CentOS_release.3F

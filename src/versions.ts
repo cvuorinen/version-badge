@@ -90,6 +90,11 @@ export const versions: Versions = {
     { version: "3", eol: "2020-12-01" },
     { version: "2", eol: "2019-04-01" },
   ],
+  // https://expressjs.com/en/advanced/security-updates.html
+  express: [
+    { version: "4.x", eol: CURRENT },
+    { version: "3.x", eol: "2015-08-01" },
+  ],
 
   // https://wiki.centos.org/About/Product
   // https://wiki.centos.org/FAQ/General#What_is_the_support_.27.27end_of_life.27.27_for_each_CentOS_release.3F

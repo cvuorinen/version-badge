@@ -20,7 +20,7 @@ export async function handler(event: APIGatewayEvent): Promise<ProxyResult> {
       body: JSON.stringify({
         subject: `${result.lang} ${result.version}`,
         status: result.eol,
-        color: result.isEol ? "red" : "green",
+        color: result.isEol ? "red" : (result.isNearEol ? "yellow" : "green"),
       }),
     };
   } catch (err) {

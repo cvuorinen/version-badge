@@ -3,9 +3,10 @@ import valid from "semver/functions/valid";
 import satisfies from "semver/functions/satisfies";
 import isPast from "date-fns/isPast";
 import parseISO from "date-fns/parseISO";
+import subMonths from "date-fns/subMonths";
 import { CURRENT, Version, versions } from "./versions";
 
-export type VersionResult = Version & { lang: string; isEol: boolean };
+export type VersionResult = Version & { lang: string; isEol: boolean; isNearEol: boolean };
 
 export function getVersion(
   lang?: string,
@@ -28,10 +29,14 @@ export function getVersion(
     return null;
   }
 
+  const isEol = result.eol !== CURRENT && isPast(parseISO(result.eol));
+  const isNearEol = result.eol !== CURRENT && !isEol && isPast(subMonths(parseISO(result.eol), 6));
+
   return {
     ...result,
     lang,
-    isEol: result.eol !== CURRENT && isPast(parseISO(result.eol)),
+    isEol,
+    isNearEol
   };
 }
 

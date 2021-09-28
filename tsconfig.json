@@ -13,7 +13,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "types": ["jest", "jest-extended"]
+    "types": [
+      "node",
+      "jest",
+      "jest-extended"
+    ]
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

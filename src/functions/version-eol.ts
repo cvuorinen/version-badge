@@ -22,7 +22,7 @@ export async function handler(event: APIGatewayEvent): Promise<ProxyResult> {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(result),
     };
-  } catch (err) {
+  } catch (err: any) {
     if (err instanceof InvalidArgumentException) {
       return { statusCode: 400, body: err.message };
     }

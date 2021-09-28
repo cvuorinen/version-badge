@@ -25,7 +25,7 @@ export async function handler(event: APIGatewayEvent): Promise<ProxyResult> {
         cacheSeconds: 60 * 60 * 24,
       }),
     };
-  } catch (err) {
+  } catch (err: any) {
     if (err instanceof InvalidArgumentException) {
       return { statusCode: 400, body: err.message };
     }

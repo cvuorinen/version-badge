@@ -80,6 +80,7 @@ type VersionResult = {
     version: string;
     eol: DateString | "current"; // Date string as YYYY-MM-DD
     isEol: boolean;
+    isNearEol: boolean; // true when EOL upcoming within 6 months
 }
 ```
 
@@ -103,6 +104,7 @@ Response:
     "version": "16.x",
     "eol": "2024-04-30",
     "lang": "nodejs",
-    "isEol": false
+    "isEol": false,
+    "isNearEol": false
 }
 ```

@@ -21,7 +21,7 @@ export async function handler(event: APIGatewayEvent): Promise<ProxyResult> {
         schemaVersion: 1,
         label: `${result.lang} ${result.version}`,
         message: result.eol,
-        color: result.isEol ? "critical" : "success",
+        color: result.isEol ? "critical" : (result.isNearEol ? "yellow" : "success"),
         cacheSeconds: 60 * 60 * 24,
       }),
     };

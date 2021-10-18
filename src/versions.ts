@@ -106,4 +106,19 @@ export const versions: Versions = {
     { version: "4", eol: "2012-02-29" },
     { version: "3", eol: "2010-10-31" },
   ],
+
+  // https://www.postgresql.org/support/versioning/
+  postgresql: [
+    { version: "13.x", eol: "2025-11-13" },
+    { version: "12.x", eol: "2024-11-14" },
+    { version: "11.x", eol: "2023-11-09" },
+    { version: "10.x", eol: "2022-11-10" },
+    { version: "9.6.x", eol: "2021-11-11" },
+    { version: "9.5.x", eol: "2021-02-11" },
+    { version: "9.4.x", eol: "2020-02-13" },
+    { version: "9.3.x", eol: "2018-11-08" },
+    { version: "9.2.x", eol: "2017-11-09" },
+    { version: "9.1.x", eol: "2016-10-27" },
+    { version: "9.0.x", eol: "2015-10-08" },
+  ],
 };
